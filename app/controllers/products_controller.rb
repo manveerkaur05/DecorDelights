@@ -44,3 +44,4 @@ class ProductsController < ApplicationController
     @breadcrumbs << { name: @product.name, url: product_path(@product) } if @product
   end
 end
+
