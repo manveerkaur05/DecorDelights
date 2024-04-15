@@ -8,5 +8,6 @@ class TaxRate < ApplicationRecord
   def self.find_by_province(province_name)
     province = Province.find_by(name: province_name)
     province.tax_rates if province
+    
   end
 end
