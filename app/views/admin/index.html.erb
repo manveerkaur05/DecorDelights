@@ -1,0 +1,31 @@
+<!-- app/views/admin/index.html.erb -->
+
+<h1>Products</h1>
+
+<% if params[:on_sale] %>
+  <h2>On Sale</h2>
+<% end %>
+
+<p><%= link_to "Create New Product", new_product_admin_path %></p>
+
+<ul>
+  <% if params[:on_sale] %>
+    <% @products.on_sale.each do |product| %>
+      <li>
+        <%= link_to product.name, show_product_admin_path(product) %>
+        <p><%= product.description %></p>
+        <p>Price: <%= number_to_currency(product.price) %></p>
+        <p>Category: <%= product.category.name %></p>
+      </li>
+    <% end %>
+  <% else %>
+    <% @products.each do |product| %>
+      <li>
+        <%= link_to product.name, show_product_admin_path(product) %>
+        <p><%= product.description %></p>
+        <p>Price: <%= number_to_currency(product.price) %></p>
+        <p>Category: <%= product.category.name %></p>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

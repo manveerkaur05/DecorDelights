@@ -1,0 +1,40 @@
+<h2>Order Confirmation</h2>
+
+<p>Your order has been successfully placed.</p>
+
+<h3>Order Summary</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total Price with Tax</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |item| %>
+      <tr>
+        <td><%= item[:product].name %></td>
+        <td><%= item[:quantity] %></td>
+        <td>$<%= item[:product].price %></td>
+        <td>$<%= item_total_with_tax(item, @user.province) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <strong>Subtotal:</strong> $<%= @subtotal %>
+</div>
+<div>
+  <strong>Taxes:</strong>
+  <ul>
+    <li>GST: $<%= @taxes[:gst] %></li>
+    <li>PST: $<%= @taxes[:pst] %></li>
+    <li>HST: $<%= @taxes[:hst] %></li>
+  </ul>
+</div>
+<div>
+  <strong>Total:</strong> $<%= @total %>
+</div>

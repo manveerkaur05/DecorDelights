@@ -1,0 +1,45 @@
+<!-- app/views/categories/index.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Categories</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Additional Custom Styles */
+    .category-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .category-list li {
+      margin-bottom: 10px;
+    }
+
+    .category-link {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .category-link:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold mb-4">All Categories</h1>
+
+  <ul class="category-list">
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.name, category, class: "category-link" %>
+      </li>
+    <% end %>
+  </ul>
+</body>
+</html>

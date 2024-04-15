@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Products</title>
+  <%= stylesheet_link_tag 'styles' %> 
+  <%= stylesheet_link_tag 'main' %> 
+  <%= stylesheet_link_tag 'styles'%>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+ </head>
+<body>
+ 
+
+  <div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-8">All Products</h1>
+
+    <% if user_signed_in? %>
+      <!-- Search Form -->
+      <%= form_tag products_path, method: :get, class: "mb-4" do %>
+        <%= text_field_tag :keyword, params[:keyword], placeholder: "Enter keyword", class: "border p-2 mr-2" %>
+        <%= select_tag :category_id, options_for_select(Category.all.map{ |c| [c.name, c.id] }, params[:category_id]), prompt: "Select category", class: "border p-2 mr-2" %>
+        <%= submit_tag "Search", class: "bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 hover:text-gray-100 mr-2"%>
+      <% end %>
+
+      <!-- Additional Product Filters -->
+      <div class="mb-8">
+  <%= link_to "On Sale", products_path(on_sale: true), class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 hover:text-gray-100 mr-2" %>
+  <%= link_to "New Products", products_path(new_products: true), class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 hover:text-gray-100 mr-2" %>
+  <%= link_to "Recently Updated", products_path(recently_updated: true), class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 hover:text-gray-100 mr-2" %>
+</div>
+
+      
+      <!-- Flash Messages -->
+      <% flash.each do |key, message| %>
+        <div class="flash <%= key %>">
+          <%= message %>
+        </div>
+      <% end %>
+
+      <!-- Product Listing -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <% @products.each do |product| %>
+          <div class="bg-white p-4 shadow-md">
+            <%= image_tag product.image_url, class: "w-full mb-4" if product.image_url.present? %>
+            <h3 class="text-xl font-bold mb-2"><%= link_to product.name, product_path(product) %></h3>
+            <p class="mb-2"><%= product.description %></p>
+            <p class="text-gray-800 font-bold"><%= product.price %></p>
+            <% if product.on_sale? %>
+              <p class="text-red-500">On Sale!</p>
+            <% end %>
+            <%= form_tag url_for(controller: 'carts', action: 'add_to_cart'), method: :post, class: "mt-4" do %>
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= submit_tag 'Add to Cart', class: "bg-gray-800 py-4 text-white px-4 py-2 rounded" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form_tag destroy_user_session_path, method: :delete, class: "inline-block" do %>
+            <%= submit_tag "Logout", class: "text-white" %>
+          <% end %>
+
+      <!-- Pagination -->
+      <%= paginate @products, class: "pagination mt-8" %>
+    <% else %>
+      <!-- Message for Non-Logged-in Users -->
+      <p>You need to <%= link_to 'sign up', new_user_registration_path %> or <%= link_to 'log in', new_user_session_path %> to view and interact with the products.</p>
+    <% end %>
+  </div>
+</body>
+</html>

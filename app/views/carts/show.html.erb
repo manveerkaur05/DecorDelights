@@ -1,0 +1,74 @@
+<!-- app/views/carts/show.html.erb -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Cart</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Additional Custom Styles */
+    .cart-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item p {
+      margin: 5px 0;
+    }
+
+    .quantity-form {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .quantity-form input[type="number"] {
+      width: 60px;
+      margin-right: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .checkout-button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .checkout-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold mb-4">Shopping Cart</h1>
+
+  <% if @cart_items.present? %>
+    <% @cart_items.each do |cart_item| %>
+      <div class="cart-item">
+        <p><%= cart_item[:product].name %></p>
+        <p>Price: <%= cart_item[:product].price %></p>
+        <%= form_tag update_quantity_cart_path, method: :post, class: "quantity-form" do %>
+          <%= hidden_field_tag :product_id, cart_item[:product].id %>
+          <%= number_field_tag :quantity, cart_item[:quantity], min: 1 %>
+          <%= submit_tag "Update Quantity", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+        <% end %>
+        <%= button_to "Remove", remove_from_cart_cart_path(product_id: cart_item[:product].id), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-500 text-white px-4 py-2 rounded" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Your shopping cart is empty.</p>
+  <% end %>
+
+  <% unless user_signed_in? %>
+    <p>You need to <%= link_to 'sign up', new_user_registration_path %> or <%= link_to 'log in', new_user_session_path %> to proceed to checkout.</p>
+  <% else %>
+    <li><a href="<%= checkout_cart_path %>" class="checkout-button">Checkout</a></li>
+  <% end %>
+</body>
+</html>

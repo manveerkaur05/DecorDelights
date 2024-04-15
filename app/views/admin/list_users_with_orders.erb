@@ -1,0 +1,14 @@
+<h1>List of Users with Orders</h1>
+
+<% @users_with_orders.each do |user| %>
+  <h2><%= user.name %></h2>
+  <ul>
+    <% user.orders.each do |order| %>
+      <li>
+        Order ID: <%= order.id %><br>
+        Order Date: <%= order.created_at %><br>
+        <!-- Other order details as needed -->
+      </li>
+    <% end %>
+  </ul>
+<% end %>

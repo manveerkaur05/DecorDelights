@@ -1,0 +1,6 @@
+<h1>New Product</h1>
+
+<%= form_with(model: @product, url: create_product_admin_path, method: :post) do |f| %>
+  <%= render 'form', f: f %>
+  <%= f.submit "Create Product" %>
+<% end %>

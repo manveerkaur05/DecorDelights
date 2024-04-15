@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Admin Dashboard</title>
+  <!-- Add any additional CSS or stylesheets here -->
+</head>
+<body>
+  <header>
+    <h1>Welcome to Admin Dashboard</h1>
+    <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+    <%= link_to "List Users with Past Orders", admin_list_users_with_orders_path %>
+  </header>
+
+  <!-- Flash messages -->
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:error] %>
+    <div class="error">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <section id="manage-products">
+    <h2>Manage Products</h2>
+    <p>Effortlessly handle your product inventory.</p>
+    <%= link_to "View Products", admin_index_path, class: "btn btn-primary" %>
+    <%= link_to "Add New Product", new_product_admin_path, class: "btn btn-secondary" %>
+  </section>
+
+  <section id="manage-categories">
+    <h2>Manage Categories</h2>
+    <p>Organize your products into categories.</p>
+    <%= link_to "View Categories", admin_categories_path, class: "btn btn-primary" %>
+    <%= link_to "Add New Category", new_admin_category_path, class: "btn btn-secondary" %>
+  </section>
+
+  <!-- Add any additional sections or content here -->
+
+  <footer>
+    <p>&copy; <%= Time.now.year %> Decor Delights. All rights reserved.</p>
+  </footer>
+</body>
+</html>

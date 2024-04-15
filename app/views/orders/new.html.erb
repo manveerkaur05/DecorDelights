@@ -1,0 +1,23 @@
+<!-- app/views/orders/new.html.erb -->
+<h1>Checkout</h1>
+
+<%= form_with model: @order, url: checkout_url do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br><br>
+  
+  <%= f.label :address %>
+  <%= f.text_field :address %><br><br>
+  
+  <%= f.label :province %>
+  <%= f.text_field :province %><br><br>
+
+  <!-- Display cart items -->
+  <h2>Cart Items</h2>
+  <% @order.cart.each do |item| %>
+    <div>
+      <%= item['name'] %> - <%= number_to_currency(item['price']) %> x <%= item['quantity'] %>
+    </div>
+  <% end %>
+
+  <%= f.submit 'Checkout' %>
+<% end %>

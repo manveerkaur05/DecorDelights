@@ -1,0 +1,20 @@
+<header>
+ <nav class="bg-gray-800 py-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <div>
+        <a href="<%= root_path %>" class="text-white text-xl font-bold hover:text-gray-300">Home</a>
+      </div>
+      <div>
+        <% if user_signed_in? %>
+          <a href="<%= edit_user_registration_path %>" class="text-white mr-4 hover:text-gray-300">Edit Profile</a>
+        <% else %>
+          <a href="<%= new_user_registration_path %>" class="text-white mr-4 hover:text-gray-300">Sign Up</a>
+          <a href="<%= new_user_session_path %>" class="text-white hover:text-gray-300">Log In</a>
+        <% end %>
+        <a href="<%= cart_path %>" class="text-white ml-4 hover:text-gray-300">Shopping Cart</a>
+        <a href="<%= categories_path %>" class="text-white ml-4 hover:text-gray-300">Categories</a>
+      </div>
+    </div>
+  </nav>
+  </div>
+</header>

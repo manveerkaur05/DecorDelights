@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @category.name %></title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Additional Custom Styles */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    .product a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .product a:hover {
+      text-decoration: underline;
+    }
+
+    .product p {
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-weight: bold;
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold mb-4"><%= @category.name %></h1>
+
+  <div class="products">
+    <% @products.each do |product| %>
+      <div class="product">
+        <%= link_to product.name, product %>
+        <p><%= product.description %></p>
+        <p class="product-price"><%= number_to_currency(product.price) %></p>
+      </div>
+    <% end %>
+  </div>
+</body>
+</html>

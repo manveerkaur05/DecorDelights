@@ -1,0 +1,87 @@
+// Define variables
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$border-radius: 4px;
+
+// Define mixins
+@mixin box-shadow($x, $y, $blur, $color) {
+  box-shadow: $x $y $blur $color;
+}
+
+// Inheritance mixin for button styles
+@mixin button-styles {
+  border-radius: $border-radius;
+}
+
+// SCSS styles for index.html.erb
+// Additional CSS for ecommerce-style enhancements
+
+// Navbar styles
+.navbar {
+  border-radius: 0; // Remove border radius
+}
+
+.nav-link {
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+}
+
+// Search form styles
+.form-control {
+  border-radius: 0; // Remove border radius
+}
+
+// Product list styles
+.product {
+  background-color: #fff; // White background
+  border: 1px solid #eee; // Lighter border
+  padding: 20px;
+  transition: all 0.3s ease; // Smooth transition
+  &:hover {
+    transform: translateY(-5px); // Lift the product on hover
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add shadow on hover
+  }
+}
+
+.product-name {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  margin-bottom: 10px;
+  color: #777;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  color: #e74c3c; // Red price color
+}
+
+.on-sale {
+  color: #27ae60; // Green color for on sale
+}
+
+// Pagination styles
+.pagination {
+  justify-content: center; // Center align pagination
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  border-radius: 0;
+  color: $primary-color;
+  background-color: transparent;
+  border-color: $primary-color;
+  &:hover {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: #fff;
+  }
+}
+
+

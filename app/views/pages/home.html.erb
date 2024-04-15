@@ -1,0 +1,17 @@
+<!-- app/views/pages/home.html.erb -->
+<h1>Welcome to Our Store</h1>
+
+<div class="navigation">
+  <%= link_to "Categories", categories_path %>
+</div>
+
+
+<div class="products">
+  <% @products.each do |product| %>
+    <div class="product">
+      <%= link_to product.name, product %>
+      <p><%= product.description %></p>
+      <p><%= number_to_currency(product.price) %></p>
+    </div>
+  <% end %>
+</div>

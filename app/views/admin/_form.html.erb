@@ -1,0 +1,20 @@
+<!-- app/views/admin/_form.html.erb -->
+
+<%= f.label :name %>
+<%= f.text_field :name %><br>
+
+<%= f.label :description %>
+<%= f.text_area :description %><br>
+
+<%= f.label :price %>
+<%= f.number_field :price, step: '0.01' %><br>
+
+<%= f.label :category_id, "Category" %>
+<%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select a category" %>
+
+
+<%= f.label :image_url %>
+<%= f.text_field :image_url %><br>
+
+<%= f.label :on_sale, "On Sale" %>
+<%= f.check_box :on_sale %>

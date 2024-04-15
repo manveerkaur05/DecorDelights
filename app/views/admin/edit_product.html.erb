@@ -1,0 +1,10 @@
+<h1>Edit Product</h1>
+
+<%= form_with(model: @product, url: update_product_admin_path(@product), method: :patch) do |f| %>
+  <%= render 'form', f: f %>
+  <%= f.submit "Update Product" %>
+<% end %>
+  
+
+
+  
