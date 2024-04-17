@@ -99,3 +99,4 @@ class AdminController < ApplicationController
     redirect_to cart_path, notice: 'Product removed from cart'
   end
 end
+
